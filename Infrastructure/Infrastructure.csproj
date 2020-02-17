@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain.Shared\Domain.Shared.csproj" />
+    <ProjectReference Include="..\Infrastructure.Shared\Infrastructure.Shared.csproj" />
+    <ProjectReference Include="..\ServiceContracts\ServiceContracts.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Persistence\" />
+    <Folder Include="ExternalAPIs\" />
+    <Folder Include="FileStorage\" />
+    <Folder Include="Authorization\" />
+    <Folder Include="Persistence\SQLServer\" />
+    <Folder Include="Persistence\MongoDB\" />
+    <Folder Include="Persistence\MongoDB\DAO\" />
+    <Folder Include="Persistence\SQLServer\DAO\" />
+    <Folder Include="Persistence\SQLServer\DAO\" />
+    <Folder Include="Persistence\MongoDB\Helpers\" />
+    <Folder Include="Persistence\SQLServer\Helpers\" />
+    <Folder Include="Persistence\SQLServer\Contexts\" />
+    <Folder Include="Persistence\MongoDB\Contexts\" />
+    <Folder Include="Persistence\SQLServer\Repositories\" />
+    <Folder Include="Persistence\MongoDB\Repositories\" />
+    <Folder Include="Persistence\MongoDB\Extensions\" />
+    <Folder Include="Persistence\SQLServer\Extensions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.10.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.1" />
+  </ItemGroup>
+</Project>
