@@ -17,6 +17,8 @@ using Newtonsoft.Json.Serialization;
 using Domain.Domains;
 using Domain.Services;
 using Infrastructure.Shared.Interfaces;
+using Domain.Shared.Repositories;
+using Infrastructure.Authorization;
 
 namespace S2T
 {
@@ -39,6 +41,8 @@ namespace S2T
             //ConfigureSQLServer(services);
             ConfigureMongoDB(services);
             ConfigureDomains(services);
+
+            ConfigureIdentityServer4(services);
 
             services.AddScoped<ICompanyService, CompanyService>();
         }
@@ -111,8 +115,22 @@ namespace S2T
 
             services.AddScoped<IPersistence<Infrastructure.Persistence.SQLServer.DAO.Company, Guid?>, Infrastructure.Persistence.SQLServer.Helpers.Persistence<Infrastructure.Persistence.SQLServer.DAO.Company, Guid?>>();
             services.AddScoped<IQuery<Infrastructure.Persistence.SQLServer.DAO.Company, Guid?>, Infrastructure.Persistence.SQLServer.Helpers.Query<Infrastructure.Persistence.SQLServer.DAO.Company, Guid?>>();
-            
+
             services.AddScoped<Domain.Shared.Repositories.ICompanyRepository, Infrastructure.Persistence.SQLServer.Repositories.CompanyRepository>();
+        }
+
+        private void ConfigureIdentityServer4(IServiceCollection services)
+        {
+            services.AddAuthentication("Bearer")
+                .AddJwtBearer("Bearer", options =>
+                {
+                    options.Authority = Configuration.GetSection("IdentityServer:ISUrl").Value;
+                    options.Audience = Configuration.GetSection("IdentityServer:ISAudience").Value;
+                    options.RequireHttpsMetadata = false;
+                });
+
+            services.AddScoped<IIdentityServerRepository, IdentityServerRepository>();
+            services.AddScoped<IIdentityServerServices, IdentityServerServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

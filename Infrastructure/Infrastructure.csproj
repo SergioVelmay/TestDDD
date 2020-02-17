@@ -13,7 +13,6 @@
     <Folder Include="Persistence\" />
     <Folder Include="ExternalAPIs\" />
     <Folder Include="FileStorage\" />
-    <Folder Include="Authorization\" />
     <Folder Include="Persistence\SQLServer\" />
     <Folder Include="Persistence\MongoDB\" />
     <Folder Include="Persistence\MongoDB\DAO\" />
@@ -30,6 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="IdentityModel" Version="4.1.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.10.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.1" />
