@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Domain.Services;
 using ServiceContracts.Output;
 using WebAPI.Helpers;
+using System.Net.Http;
+using IdentityModel.Client;
 
 namespace WebAPI.Controllers
 {
@@ -15,10 +17,12 @@ namespace WebAPI.Controllers
     public class TestController : ControllerBase
     {
         private ICompanyService _service;
+        private IIdentityServerServices _identityServerServices;
 
-        public TestController(ICompanyService service)
+        public TestController(ICompanyService service, IIdentityServerServices identityServerServices)
         {
             _service = service;
+            _identityServerServices = identityServerServices;
         }
 
         [HttpGet]
@@ -61,6 +65,17 @@ namespace WebAPI.Controllers
             {
                 return new ExceptionResult(ex);
             }
+        }
+
+        [HttpGet("IdentityTest")]
+        public async Task IdentityTest()
+        {
+            var accessToken = await _identityServerServices.GetAccessTokenAsync();
+
+            // call api 
+            var apiClient = new HttpClient();
+            apiClient.SetBearerToken(accessToken);
+            var response = await apiClient.GetAsync("http://localhost:57242/identity");
         }
     }
 }
