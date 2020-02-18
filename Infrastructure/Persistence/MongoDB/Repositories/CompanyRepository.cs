@@ -52,7 +52,8 @@ namespace Infrastructure.Persistence.MongoDB.Repositories
 
         public async Task<IEnumerable<Company>> FindByName(string name)
         {
-            var x = await _query.FindAsync(item => item.Name == name);
+            var x = await _query.FindAsync(item => item.Name == name && item.TableName == DbCollectionCatalog.Company);
+            //var x = await _query.FindAsync(item => true);
             var y = _mapper.Map<IEnumerable<DAO.Company>, IEnumerable<Company>>(x);
             return y;
         }

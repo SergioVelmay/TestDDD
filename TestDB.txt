@@ -1,0 +1,34 @@
+cd C:\Program Files\MongoDB\Server\4.2\bin
+
+mongod --dbpath C:\Users\SergioVelasco\Desktop\TestDDD\MongoServer
+
+
+
+cd C:\Program Files\MongoDB\Server\4.2\bin
+
+mongo
+
+use TestDB
+
+db.createCollection('Entities')
+
+db.Rotuladores.insertMany(
+    [
+        {
+            
+            'TableName': 'COMPANY',
+            'Name': 'Test'
+        },
+        {
+            
+            'TableName': 'COMPANY',
+            'Name': 'Prueba'
+        },
+        {
+            
+            'TableName': 'CACATUA',
+            'Name': 'Edding 360',
+            'Code': 123456
+        }
+    ]
+)

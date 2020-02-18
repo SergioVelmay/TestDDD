@@ -20,7 +20,8 @@ namespace Infrastructure.Persistence.MongoDB.Helpers
             var prefix = func.Compile();
             Expression<Func<TDAO, bool>> expr = item => prefix(item) && item.GetTableName() == GetTableName();
 
-            return expr;
+            //return expr;
+            return func;
         }
 
         public IEnumerable<TDAO> Find(FilterDefinition<TDAO> filter)
@@ -41,8 +42,9 @@ namespace Infrastructure.Persistence.MongoDB.Helpers
         public async Task<IEnumerable<TDAO>> FindAsync(Expression<Func<TDAO, bool>> func)
         {
             var x = _context.GetMongoCollection();
-            var y = GetExpression(func);
-            var z = await x.Find(y).ToListAsync();
+            //var y = GetExpression(func);
+            var z = await x.Find(func).ToListAsync();
+            //var z = await x.Find(y).ToListAsync();
             return z;
         }
 

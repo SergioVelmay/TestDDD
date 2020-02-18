@@ -32,8 +32,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                // var x = await _service.FindCompany("Test");
-                var x = await _service.FindCompanies();
+                var x = await _service.FindCompany("Test");
+                //var x = await _service.FindCompanies();
                 var y = new ApiResult<IEnumerable<CompanyDTO>>(x);
                 return y;
             }
